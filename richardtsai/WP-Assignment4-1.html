@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="file.css">
+<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<!-Assignment4->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<!-Assignment4->
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=La+Belle+Aurore">
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>資科系必修課－程式語言</title>
+<!--<meta name="description" content="本課程講授「程式語言原理與設計」，而不是教授某一程式語言。">-->
+</head>
+
+<body class="container">
+
+<header class="row headerline cover">
+	<div class="col-sm-7"><h1>資科系必修－程式語言<br>Programming Language</h1></div>
+	<div class="col-sm-5"> <!--col-sm-offset-1-->
+		<marquee onMouseOver="this.stop()" onMouseOut="this.start()" height="50" scrollamount="5">Copyright (c) 2015 Nccu.edu. All rights reserved. Design by YiChiaTsai.</marquee>
+		<div class="course-box">
+			<a href="https://yichiatsai.github.io/WebProg/WP-Assignment4-2.html"><blockquote>登記選課（Assignment4-2)</blockquote></a>
+		</div>
+		<form action="" method="post" class="form-inline" id="search">
+			<div class="form-group">
+				<input class="form-text form-control" name="search" size="24" maxlength="64">
+				<input class="form-submit btn btn-success" value="Search" size="5">
+			</div>
+		</form>
+	</div>
+</header>
+
+<!-- 可能有數個標題（Comment） -->
+
+<nav class="row">
+	<ul class="nav nav-pills nav-justified" id="myTab">
+		<li class="active"><a data-toggle="tab" href="#Course-Info">課程資訊</a></li>
+		<li><a data-toggle="tab" href="#Course-Portrait">課程簡述</a></li>
+		<li><a data-toggle="tab" href="#Course-Syllabus">課程內容</a></li>
+		<li><a data-toggle="tab" href="#Course-Other">課程要求與附錄</a></li>
+		<li><a data-toggle="tab" href="#Course-Link">課程相關連結</a></li>
+		<!--	<li role="presentation" class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+	  課程相關連結<span class="caret"></span></a>
+	<ul class="dropdown-menu" role="menu">
+			<li><a href="#">Action</a></li>
+			<li><a href="#">Another action</a></li>
+			<li><a href="#">Something else here</a></li>
+	</ul>
+  </li>
+-->
+	</ul>
+</nav>
+
+
+<article class="row tab-content course docu">
+	<div class="course-info tab-pane fade in active" id="Course-Info">
+		<div class="col-sm-12">
+			<h1>課程資訊:</h1>
+		</div>
+		<div class="col-sm-8">
+			<table border="3">
+				<tr>
+					<th style="color:blue" colspan="4">課程簡表 Course Table</th>
+				</tr>
+			</table><br>
+			<table class="table table-hover" border="2">
+				<tr>
+					<th style="color:blue">學年/學期 Academic Year/Semester</th>
+					<td colspan="3">103 學年 第 2 學期</td>
+				</tr>
+				<tr>
+					<th style="color:blue" rowspan="2">課程名稱 Course Name
+						703023-001</th>
+					<td colspan="3">(中 Ch.)程式語言</td>
+				</tr>
+				<td colspan="3">(英 Eng.)Programming Languages</td>
+				<tr>
+					<th style="color:blue">授課教師 Instructor</th>
+					<td  colspan="3">陳恭</td>
+				</tr>
+				<tr>
+					<th style="color:blue">修別 Type of Credit</th>
+					<td>必修</td>
+					<th style="color:blue">學分數No. of Credits</th>
+					<td>3</td>
+				</tr>
+				<tr>
+					<th style="color:blue" colspan="4">備註 Note</th>
+				</tr>
+				<tr>
+					<td colspan="4">N/A</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="col-sm-4">
+			<table border="3">
+				<tr>
+					<th style="color:blue" colspan="4">課程目標 Course Objectives</th>
+				</tr>
+			</table>
+
+			<div class="course-box">
+				<h1>小提醒:</h1>
+				<p>本課程講授「程式語言原理與設計」，而不是教授某一程式語言。</p>
+				<blockquote>不適合無程式語言基礎者選修</blockquote>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="col-sm-12 course-portrait tab-pane" id="Course-Portrait">
+		<h1>課程簡述:</h1>
+		<p>程式語言是撰寫程式的主要工具，不同的程式語言各有其功能特色與適用的範疇。 伴隨新的程式設計方法的發展，就會有新的程式語言誕生。<br><br>
+		1960年代末期所展開的 <em>「結構化程式設計」</em>風潮，影響1970年代初期的Pascal語言甚鉅；1970年代中期學者倡議的 <em>「模組化資訊隱藏」</em>與<em>「抽象化資料型態」</em>，也早已融入物件導向程式語言中。<br><br>
+		此外，從不同計算模型發展出來的函數式程式語言與邏輯式程式語言，一直是學者專家研究的對象，
+		其各種高階的抽象機制往往是新一代語言在設計時，引導設計者發展創新功能的基礎。 例如，Java語言採用Lisp所首創的<strong>「Garbage Collection」</strong>機制；最新版的Java JDK1.5(最近改稱JDK5.0)所新增的<strong>Generics</strong>功能(C#也有類似功能) 明顯的受到SML語言多元型態(Parametric Polymorphism)設計的影響。<br><br>
+		由此可見程式語言結構與程式設計方法之間有著密不可分關係，對於各種程式語言的理解與掌握愈深，自然愈能發揮其特色，增加程式設計與撰寫的效用與效率， 所謂「工欲善其事必先利其器」也。<br><br>
+		本課程目的在於介紹各種不同類型的程式語言，並且從程式設計的角度，詳盡分析各種程式語言的特色與優缺點，強化學生對程式語言的認識，從而增廣學生在運用各種程式語言進行程式開發的能力。<br>
+		</p>
+
+		<ol>
+			<li>Learn the principles and practices of programming languages.</li>
+			<li>Understand the semantic concepts underlying mainstream programming languages</li>
+			<li>Get acquaintance with non-imperative languages such as Scheme and Haskell.</li>
+		</ol>
+
+		<hr>
+		<p>文末註釋:</p>
+		<dl>
+			<dt>「工欲善其事必先利其器」</dt>
+			<dd>要做好工作，先要使工具鋒利。比喻要做好一件事，準備工作非常重要。</dd>
+		</dl>
+	</div>
+
+	<div class="col-sm-12 course-syllabus tab-pane" id="Course-Syllabus">
+		<h1>課程內容:</h1>
+		<table border="3">
+			<tr>
+				<th style="color:blue" colspan="4">課程大綱 Course Description</th>
+			</tr>
+		</table>
+
+		<p>
+		<ol class="course-content">
+			<li>Introduction to programming languages study</li>
+			<li>Functional programming with Scheme & Haskell</li>
+			<li>Syntax pirocessing</li>
+			<li>Basic semantic concepts</li>
+			<li>Binding scopes environment and storage</li>
+			<li>Expressions statements procedures</li>
+			<li>Types and modules</li>
+			<li>Object-Orientation (OO) and OO programming languages</li>
+		</ol>
+		</p>
+
+		<table border="3">
+			<tr>
+				<th style="color:blue" colspan="4">上課進度 Class Schedule</th>
+			</tr>
+		</table>
+
+		<p>
+		<ul class="course-week">
+			<li><span id="time">Week 1~4:</span><span id="content">Topic 1-2</span></li>
+			<li><span id="time">Week 5:</span><span id="content">Topic 3</span></li>
+			<li><span id="time">Week 6~8:</span><span id="content">Topic 4~6</span></li>
+			<li><span id="time">Week 9~12:</span><span id="content">Topic 7~9</span></li>
+			<li><span id="time">Week 13~14:</span><span id="content">Selected Topics</span></li>
+			<li><span id="time">Week 15~18:</span><span id="content">Student presentations</span></li>
+		</ul>
+		</p>
+	</div>
+
+	<div class="course-other tab-pane" id="Course-Other">
+		<div class="col-sm-12">
+			<h1>課程要求與附錄:</h1>
+		</div>
+
+		<div class="col-sm-4">
+			<table border="3">
+				<tr>
+					<th style="color:blue" colspan="4">課程要求/評分標準 Course requirements/Grading standards</th>
+				</tr>
+			</table>
+
+			<p>
+			<ol class="course-grading">
+				<li>Homework</li>
+				<li>Programming assignments</li>
+				<li>Midterm and Final report</li>
+			</ol>
+			</p>
+		</div>
+		<div class="col-sm-4">
+			<table border="3">
+				<tr>
+					<th style="color:blue" colspan="4">參考書目 Textbook & references<br> <div style="color:red">（為維護智慧財產權，請務必使用正版書籍）</div>
+					</th>
+				</tr>
+			</table><br>
+
+			<p>
+			<strong>無指定教科書，使用教師投影片與建議閱讀文件，以下為參考書：</strong><br>
+			John C. Mitchell Concepts in Programming Languages Cambridge University Press 2002.新月<br><br>
+
+			<strong>其它：</strong><br>
+			<span style="color:orange">*那些 functional programming 教我的事：</span><br>    <em>https://ihower.tw/blog/archives/6513</em><br><br>
+			<span style="color:orange">*Audrey Tang(唐鳳) 程式語⾔言 與 軌道⼥女孩 Programming Languages! & Rails Girls Taiwan：</span><br>
+			<em>http://www.slideshare.net/autang/railsgirlstw-20140427</em><br><br>
+			<span style="color:orange">*Audrey Tang(唐鳳) Commercial Uses of Functional Programming：</span><br>
+			<em>http://www.slideshare.net/autang/commercial-uses-of-functional-programming?related=1</em><br><br>
+			</p>
+		</div>
+		<div class="col-sm-4">
+			<table border="3">
+				<tr>
+					<th style="color:blue" colspan="4">本課程附件 Course attachments</th>
+				</tr>
+			</table>
+
+			<p>
+			N/A
+			</p>
+		</div>
+	</div>
+
+	<div class="col-sm-12 course-link tab-pane" id="Course-Link">
+		<h1>課程相關連結:</h1>
+		<header class="headerline">
+			<br>
+			<img src="http://ameydhar.github.io/index_files/teaching.jpg" alt="程式語言集合"><br>
+			<div class="meta">
+				<span class="fav-count"> <i class="fa fa-heart"></i> 1994</span>
+				<span class="views-count"> <i class="fa fa-eye"></i> 69407</span>
+				<time class="timestamp" datetime="2014-02-24">
+					<i class="fa fa-clock-o"></i> 2014 年 02 月 24 日開始上課
+				</time>
+			</div>
+			<ul class="ullink">
+				<li><a href="http://www.cs.nccu.edu.tw/html/01/01_news.php" (target="_blank")>開課系所－資科系</a></li>
+				<li><a href="https://yichiatsai.github.io/WebProg/WP-Assignment4-2.html" (target="_blank")>登記選課連結（Assignment4-2)</a></li>
+				<li><a href="http://ameydhar.github.io/index_files/teaching.jpg" (target="_blank")>Image Source</a></li>
+				<li><a href="http://en.wikipedia.org/wiki/Programming_language" (target="_blank")>程式語言定義？ WikiPedia it！</a></li>
+				<li>
+				<div class="social-buttons">
+					<a href="http://www.facebook.com.tw">讚</a> | <a href="http://www.youtube.com.tw">+1</a>
+				</div>
+				</li>
+			</ul>
+		</header>
+	</div>
+
+</article>
+
+<hr>
+<footer class="show-animation">
+	<img src="http://ameydhar.github.io/index_files/teaching.jpg" alt="程式語言集合"><br>
+</footer>
+
+<footer id="round">
+	<li><a href="http://ameydhar.github.io/index_files/teaching.jpg" (target="_blank")>Image Source</a></li>
+	<li><a href="http://en.wikipedia.org/wiki/Programming_language" (target="_blank")>程式語言定義？ WikiPedia it！</a></li>
+	<li>
+	<div class="social-buttons">
+		<a href="http://www.facebook.com.tw">讚</a> | <a href="http://www.youtube.com.tw">+1</a>
+	</div>
+	</li>
+</footer>
+
+<footer id="stretch">
+	<p>Copyright (c) 2015 Nccu.edu. All rights reserved. Design by YiChiaTsai.</P>
+</footer>
+</body>
+</html>

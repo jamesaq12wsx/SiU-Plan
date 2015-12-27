@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="application" class="nccu.se.di.RpgApplication">
+		<property name="tom" ref="tom" />
+		<property name="mary" ref="mary" />
+	</bean>
+	<bean id="tom" class="nccu.se.di.Thief">
+		<constructor-arg value="tom" />
+		<constructor-arg value="100" />
+		<constructor-arg value="0" />
+	</bean>
+	<bean id="mary" class="nccu.se.di.Magician">
+		<constructor-arg value="mary" />
+		<constructor-arg value="80" />
+		<constructor-arg value="20" />
+	</bean>
+</beans>

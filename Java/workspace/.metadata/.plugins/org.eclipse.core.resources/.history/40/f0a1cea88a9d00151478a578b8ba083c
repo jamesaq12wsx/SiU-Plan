@@ -1,0 +1,324 @@
+package apjp2015;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import static java.lang.System.out;
+
+/**
+ * Implement all methods given in this class using lambda expressions.
+ * @author chencc
+ *
+ */
+public class HW21 {	
+	
+	static final String s1 =			
+		"Want to lose weight? Eating lunch earlier rather than later may help you out. Dieters who ate early lunches tended to lose more weight than those who had their midday meal on the later side, according to a Spanish study. " +
+		"The finding doesn¡¦t prove that bumping up your lunch hour will help you shed that extra weight, but it is possible that eating times play a role in how the body regulates its weight, researchers said."+
+		"Research included 420 people attending nutrition clinics in southeast Spain. Along with going to regular group therapy sessions with nutrition and exercise counseling, dieters recorded their food and reported on their daily physical activity. About half of the people said they ate lunch before 3:00 p.m. and half after. Over 20 weeks of counseling, early and late lunchers ate a similar amount of food, and burned a similar amount of calories through daily activities." +					
+		"However, early eaters lost an average of 10 kilograms - just over 11 percent of their starting weight - while late eaters dropped 7.7 kg, or nine percent of their initial weight."  ;
+			
+	final static String[] s2 = s1.split("[ ?.:,0-9-]+") ;
+	 
+	// do not change words!
+	public final static List<String> words = Collections.unmodifiableList(Arrays.asList(s2));
+	
+	public final static List<String> words1 = words.subList(0, 20) ;
+	
+	public final static List<String> words2 = Collections.unmodifiableList(
+			Arrays.asList("100", "300", "20", "40", "77", "88", "1001", "6", "57", "90"));
+	
+	
+	/**
+	 * Sort words by the length of each word.
+	 * Use Collections.sort(List<T>) or Collections.sort(List<T>, Comparator<? super T>)
+	 * @return
+	 */
+	public static List<String> sortWordsByLength() {
+		// copy words and sort on the new list.
+		List<String> nWords = new ArrayList<>(words) ;
+		
+		// sort nWords using Collections.sort
+		// Put your code here! ...				
+		
+//		Collections.sort(nWords, new Comparator<String>() {
+//
+//			@Override
+//			public int compare(String o1, String o2) {
+//				// TODO Auto-generated method stub
+//				return o1.length() - o2.length();
+//			}
+//
+//		});
+		
+		// Written by Richard YC. Tsai
+		Collections.sort(nWords, (String o1, String o2) -> o1.length()-o2.length());
+
+		return nWords ;	
+	}
+	
+	/**
+	 * Sort words by the reverse length of each word, i.e, longest word should be placed at 
+	 * the first position.  
+	 * @return
+	 */
+	public static List<String> sortWordsByReverseLength() {
+		
+		List<String> nWords = new ArrayList<>(words) ;
+		
+		// sort nWords using Collections.sort
+		// Put your code here! ...
+			
+		// Written by Richard YC. Tsai
+		Collections.sort(nWords, (String o1, String o2) -> -(o1.length()-o2.length()));
+		
+		return nWords ;
+	}	
+	
+	
+	/**
+	 * sort words by the number of input char 't' occurring in each word.
+	 * @return
+	 */
+	public static List<String> sortWordsByNumberOfChar(char c ) {
+		
+		List<String> nWords = new ArrayList<>(words) ;
+		
+		// sort nWords using Collections.sort
+		// Put your code here! ...
+		
+		// Written by Richard YC. Tsai
+		Collections.sort(nWords, (String o1, String o2) ->  ((o1.length() - o1.replace("t", "").length()) - (o2.length() - o2.replace("t", "").length())) );
+		
+		return nWords ;
+	}
+	
+	
+	
+	/**
+	 * implement the NoneMatch method which will return true if no elements of the input list pass the
+	 * pred.test method  
+	 * @param list : list of element to be test
+	 * @param pred : the predicate
+	 * @return 
+	 * @return 
+	 * @return true iff all elements of list pass the predicate test. 
+	 */
+	 public static <T> boolean NoneMatch(List<T> list, Predicate<? super T> pred){
+		
+		// Put your code here! ...
+	
+		// Written by Richard YC. Tsai
+		for (T item : list) {
+	      if(pred.test(item))
+	        return false;
+	    }
+		
+		return true;
+		
+//		boolean rlt = true;
+//		list.forEach( (item)->{ if(pred.test(item)) rlt=false; } );
+	 }
+	 
+	 
+	 /**
+	  * Make a static method called map.
+	  * It should take a List<T> l and a Function<? super T, ?extends U> f and
+	  * return a new List { f(e) | e in l } of type List<U> that contains the results of applying the Function
+	  * to each element of the original List. E.g.:
+	  * List<String> excitingWords = map(words, s -> s + "!");
+	  * List<String> eyeWords = map(words, s -> s.replace("i", "eye"));
+	  * List<String> upperCaseWords = map(words, String::toUpperCase);
+	  * The result should be equivalent to  the execution of  the code:
+	  * <pre> list.stream().map(f).collect(Collectors.toList()) ;
+	  * BUT YOU CANNOT USE Stream API in this implementation.
+	  */
+	 
+	 public static <T,U> List<U> map(List<T> list, Function<? super T, ? extends U> f){
+		 
+		 List<U> rlt = new ArrayList<>();
+		 
+		 // Put your code here! ...
+		 
+		 // Written by Richard YC. Tsai
+		 list.forEach( (item)->rlt.add(f.apply(item)) );
+		 		 
+		 return rlt;
+		 
+//		 rlt = list.stream().map(f).collect(Collectors.toList());
+
+//		 for (T item : list) {
+//			 rlt.add(f.apply(item));
+//	     }
+	 }
+	 
+	 
+	 /**
+	  * Implement the flatMap function on list<T>. 
+	  * The result should be equivalent to  the execution of the code:
+	  * <pre> list.stream().flatMap(f).collect(Collectors.toList()) ;
+	  * BUT YOU CANNOT USE Stream API in this implementation.  
+	  * @param list
+	  * @param f a function from T to List<R>
+	  * @return a list fo type list<R> 
+	  */
+	 
+	 public static <T,R> List<R> flatMap(List<T> list, Function<? super T, List<R>> f) {
+		// The result should be equivalent to the code:
+		// list.stream().flatMap(f) ;
+		// but YOU CANNOT USE this stream API in this implementation.
+		 List<R> rlt = new ArrayList<>();
+		 
+		// Put your code here! ...
+		
+		// Written by Richard YC. Tsai
+		list.forEach( (item)->rlt.addAll(f.apply(item)) );
+		
+		return rlt;
+		
+//	    rlt = list.stream().flatMap(f).collect(Collectors.toList());
+	 }
+	 
+	 
+	 
+	 /**
+	  * Partition the input list into two lists, one being the list [ e | p(e) is true ] and the other
+	  * the list [ e | p(e) returns false ]. 
+	  * The result are put in a map (HashMap or TreeMap) under the key Boolean.True and Boolean.False, respectively.
+	  * The result should be equivalent to the execution of the code:
+      *	<pre> list.stream().collect(Collectors.partitoningBy(p)) ; </pre>
+      * But YOU CANNOT USE Stream API in this implementation.  
+	  * @param list
+	  * @param p
+	  * @return
+	  */
+	 public static <T> Map<Boolean, List<T>> partition(List<T> list, Predicate<? super T> p){
+		 // The result should be equivalent to the code:
+		 // list.stream().collect(Collectors.partitoningBy(p)) ;
+		 // but YOU CANNOT USE this stream API in this implementation.
+		 Map<Boolean, List<T>> rlt = new HashMap<>() ;
+		 
+		// Put your code here! ...	 
+		 
+		// Written by Richard YC. Tsai
+		 ArrayList<T> true_list = new ArrayList<T>();
+		 ArrayList<T> false_list= new ArrayList<T>();
+		 
+		 list.forEach( (item)->{ if(p.test(item)) true_list.add(item); else false_list.add(item); } );
+		 
+		 rlt.put(true, true_list);
+		 rlt.put(false, false_list);
+		   
+		 return rlt;
+		 
+//		 rlt = list.stream().collect(Collectors.partitoningBy(p));
+	 }
+	 
+	
+	 
+	 /**
+	  * Implement the collect function on list<T>.
+	  * The result should be equivalent to the execution of the code:
+	  *	<pre> list.stream().collect(col) ; </pre>
+	  *  But YOU CANNOT USE stream API in this implementation.
+	  *    
+	  * @param list 
+	  * @param col a collector of type Collector<T,A,R>
+	  * @return a value of type R. 
+	  */
+//	 public static <T> Map<Boolean, List<T>> partition(List<T> list, Predicate<? super T> p){
+	 public static <T,A,R> R collect(List<T> list, Collector<T,A,R> collector ) {
+		// The result should be equivalent to the code:
+		// list.stream().collect(col) ;
+		// but YOU CANNOT USE this stream API in this implementation.
+		 
+		// Put your code here! ...
+		 
+		//Written by Richard YC. Tsai
+		list.stream().collect( collector, Collectors.toList() ); 
+		
+		return null ;
+	 }
+	 
+
+	public static void main(String[] args) {
+				
+		
+		out.println(">>> Sort words by length :") ;
+		out.println(sortWordsByLength()) ;
+		
+		
+		out.println(">>> Sort words by length in decreasing order:") ;
+		out.println(sortWordsByReverseLength()) ;			
+		
+		out.println(">>> Sort words by number of 't': ") ;
+		out.println(sortWordsByNumberOfChar('t')) ;
+		
+		out.println(">>> There is no word in words whose length is in [1,10):") ;
+		out.println(NoneMatch(words, w -> w.length()>0 && w.length() < 10  )) ;
+		
+		
+		out.println(">>> There is no word in words2 which contains 'o' :") ;
+		out.println(NoneMatch(words2, w -> w.contains("o") )) ;
+		
+		out.println(">>> Map word in words1 to upperCase:") ;
+		out.println(map(words1, String::toUpperCase));		
+		
+		out.println(">>> flatMap word in words2 to character list:") ;
+		
+		Function<String, List<Character>> as = s -> s.chars().mapToObj(c -> new Character((char) c)).collect(Collectors.toList()) ;	
+		List<Character> rlt = flatMap(words2, as);
+		out.println(rlt);
+		
+		out.println(">>> partition word in words into two list depending on whether its length>2:") ;
+		out.println( partition(words2, s -> s.length() > 2 ));
+		
+		out.println(">>> group strings in words according to their length:") ;
+		out.println( collect(words2, Collectors.groupingBy(s -> s.length())));
+		
+		
+/* The result should look like following:  */		
+// 
+//		>>> Sort words by length :
+//			[a, a, p, m, a, a, to, to, on, to, up, it, is, in, in, to, on, of, of, of, of, an, of, of, kg, or, of, may, you, out, who, ate, who, had, the, The, you, but, how, the, its, and, and, the, ate, and, and, ate, and, Want, lose, than, help, lose, more, than, meal, side, that, your, hour, will, help, shed, that, that, play, role, body, said, with, with, food, half, said, they, half, Over, late, food, lost, just, over, late, nine, lunch, later, early, those, their, later, study, prove, lunch, extra, times, Spain, Along, going, group, their, their, daily, About, lunch, after, weeks, early, daily, early, their, while, their, weight, Eating, rather, tended, weight, midday, weight, eating, weight, people, people, before, amount, burned, amount, eaters, weight, eaters, weight, earlier, Dieters, lunches, Spanish, finding, doesn¡¦t, bumping, clinics, regular, therapy, dieters, similar, similar, through, However, average, percent, dropped, percent, initial, possible, Research, included, sessions, exercise, recorded, reported, physical, activity, lunchers, calories, starting, according, regulates, attending, nutrition, southeast, nutrition, kilograms, counseling, counseling, activities, researchers]
+//			>>> Sort words by length in decreasing order:
+//			[researchers, counseling, counseling, activities, according, regulates, attending, nutrition, southeast, nutrition, kilograms, possible, Research, included, sessions, exercise, recorded, reported, physical, activity, lunchers, calories, starting, earlier, Dieters, lunches, Spanish, finding, doesn¡¦t, bumping, clinics, regular, therapy, dieters, similar, similar, through, However, average, percent, dropped, percent, initial, weight, Eating, rather, tended, weight, midday, weight, eating, weight, people, people, before, amount, burned, amount, eaters, weight, eaters, weight, lunch, later, early, those, their, later, study, prove, lunch, extra, times, Spain, Along, going, group, their, their, daily, About, lunch, after, weeks, early, daily, early, their, while, their, Want, lose, than, help, lose, more, than, meal, side, that, your, hour, will, help, shed, that, that, play, role, body, said, with, with, food, half, said, they, half, Over, late, food, lost, just, over, late, nine, may, you, out, who, ate, who, had, the, The, you, but, how, the, its, and, and, the, ate, and, and, ate, and, to, to, on, to, up, it, is, in, in, to, on, of, of, of, of, an, of, of, kg, or, of, a, a, p, m, a, a]
+//			>>> Sort words by number of 't': 
+//			[lose, lunch, earlier, may, help, you, who, early, lunches, lose, more, who, had, midday, meal, on, side, according, a, Spanish, The, finding, prove, bumping, up, your, lunch, hour, will, help, you, shed, is, possible, play, a, role, in, how, body, researchers, said, Research, included, people, clinics, in, Spain, Along, going, regular, group, sessions, and, exercise, counseling, recorded, food, and, on, daily, physical, half, of, people, said, lunch, before, p, m, and, half, Over, weeks, of, counseling, early, and, lunchers, a, similar, of, food, and, burned, a, similar, of, calories, daily, However, early, an, average, of, kilograms, over, of, while, dropped, kg, or, nine, of, Want, to, weight, Eating, rather, than, later, out, Dieters, ate, tended, to, weight, than, those, their, the, later, to, study, doesn¡¦t, extra, weight, but, it, eating, times, the, regulates, its, weight, with, to, therapy, with, dieters, their, reported, their, About, the, they, ate, after, late, ate, amount, amount, through, eaters, lost, just, percent, their, weight, late, eaters, percent, their, initial, weight, that, that, that, attending, nutrition, southeast, nutrition, activity, activities, starting]
+//			>>> There is no word in words whose length is in [1,10):
+//			false
+//			>>> There is no word in words2 which contains 'o' :
+//			true
+//			>>> Map word in words1 to upperCase:
+//			[WANT, TO, LOSE, WEIGHT, EATING, LUNCH, EARLIER, RATHER, THAN, LATER, MAY, HELP, YOU, OUT, DIETERS, WHO, ATE, EARLY, LUNCHES, TENDED]
+//			>>> flatMap word in words2 to character array:
+//			[1, 0, 0, 3, 0, 0, 2, 0, 4, 0, 7, 7, 8, 8, 1, 0, 0, 1, 6, 5, 7, 9, 0]
+//			>>> partition word in words into two list depending on whether its length>2:
+//			{false=[20, 40, 77, 88, 6, 57, 90], true=[100, 300, 1001]}
+//			>>> group strings in words according to their length:
+//			{1=[6], 2=[20, 40, 77, 88, 57, 90], 3=[100, 300], 4=[1001]}
+//		
+//		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

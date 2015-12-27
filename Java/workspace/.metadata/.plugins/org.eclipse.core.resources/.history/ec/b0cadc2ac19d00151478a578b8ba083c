@@ -1,0 +1,584 @@
+package apjp2015;
+
+import static java.lang.System.out;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+/**
+ * Implement all methods given in this class using the Streaming API.
+ * Note: HW22 contains 3 subpart classes: HW221,HW222 and HW223.
+ * 
+ * @author chencc
+ *
+ */
+public class HW22 {
+
+	// do not change the following final constants!
+	public final static List<String> WORDS0 = Collections.unmodifiableList(Arrays.asList(HW21.s2));
+
+	public final static List<String> WORDS = WORDS0.subList(0, 20);
+
+	public final static List<String> WORDS2 = Collections
+			.unmodifiableList(Arrays.asList("100", "300", "20", "40", "77", "88", "1001", "6", "57", "90"));
+
+	public final static Random PRGN = new Random(12345678907L);
+
+	public final static int[] NUMBERS = IntStream.generate(PRGN::nextInt).filter(n -> n > 0).limit(15).toArray();
+
+	public final static Number[] NUMBERS2 = IntStream.of(NUMBERS).mapToObj(n -> n).toArray(Number[]::new);
+
+	
+	/**
+	 * Simple stream API programming.
+	 * @author chencc
+	 *
+	 */
+	public static class HW221 {
+	/**
+	 * <ul>
+	 * <li>1. Generate an IntStream from an int[] numbers . 
+	 * <li>2. use forEach(lambda) to print each integer in numbers to the console, 
+	 * <li>3. Each number should be printed on a separate line, with two spaces in front of each number.
+	 * </ul>
+	 */
+	public static void printNumbers(int[] numbers) {
+
+		// put your code here!
+		
+		// Written by Richard YC. Tsai
+		IntStream ints = IntStream.of(numbers);
+		ints.forEach(item->System.out.println("  "+item));
+	}
+
+	/**
+	 * <ul>
+	 * <li>1. Generate a Stream object from a List<String> list 
+	 * <li>2. use forEach(methodRef) to print each word in words to the console, where the input
+	 *        methodRef to forEach should be a method reference. 
+	 * <li>3. Each word should be printed on a separate line.
+	 * </ul>
+	 */
+	public static void printWords2(List<String> list) {
+		
+		// put your code here!
+
+		// Written by Richard YC. Tsai
+		Stream<List<String>> strm = Stream.of(list);
+		strm.forEach(item->System.out.println(item));
+	}
+
+	/**
+	 * <ul>
+	 * <li>1. Generate a Stream<String> object from a List<String> object 
+	 * <li>2. use map() to generate another Stream { s + "!" | s is in original stream } 
+	 * <li>3. convert the mapped stream into a list.
+	 * <li> Ex: ["Ab", "bc"] --> ["Ab!", * "bc!"]
+	 * </ul>
+	 */
+	public static List<String> words2suprisingWords(List<String> list) {
+		// put your code here!
+		
+		// Written by Richard YC. Tsai
+		List<String> rlt = new ArrayList<>();
+		rlt = list.stream().map(item->item+"!").collect(Collectors.toList());
+		
+		return rlt;
+	}
+
+	/**
+	 * <ol>
+	 * <li>1. Generate a Stream<String> object from ws 
+	 * <li>2. use 3 calls of filter() to passing all strings s that satisfy the conditions:
+	 * <ul>
+	 * <li>2.1 s .length is less than 8</li>
+	 * <li>2.2 s contains 'e'</li>
+	 * <li>2.3 s is of odd length</li>
+	 * </ul>
+	 * <li>3. convert the final stream into a lsit. Ex: ["cbe", "ec", "ddeef" ] --> ["cbe", "ddeef"]
+	 * </ol>
+	 */
+	public static List<String> FindAllwordsPassingASeqOfTests(String... ws) {
+
+		// put your code here!
+		 return null;
+	}
+
+	/**
+	 * Use the Stream.map() and reduce() method to generate a string which is the
+	 * concatenation of uppercased versions of all words in ws. 
+	 * Ex:<code> ws=["abS", "deF"] ==> return "ABSDEF" </code>
+	 * 
+	 * @param ws  a list of strings.
+	 * @return
+	 */
+	public static String words2UpperCaseWord(List<String> ws) {
+		// put your code here!
+		 return null;
+		
+	}
+
+	/**
+	 * Produce a String that is the result of concatenating all input words
+	 * together, but with commas in between. E.g., if ws = [hi, hello,...], then
+	 * the result should be "hi,hello,...". Note that there is no comma at the
+	 * beginning, before "hi", and also no comma at the end, after the last
+	 * word.
+	 * 
+	 */
+	public static String concateWordsWithComma(List<String> ws) {
+		//put your code here
+		return null;
+		
+	}
+	
+	public static void test(){
+		System.out.println("Words (no spaces):");
+		printWords2(WORDS);
+
+		System.out.print("Words2SurprisingWords:");
+		System.out.println(words2suprisingWords(WORDS2));
+
+		System.out.print("wordsPassingASeqOfTests:");
+		System.out.println(FindAllwordsPassingASeqOfTests(new String[] { "abcdefg", "dces", "dde", "facde" }));
+		
+		
+
+		System.out.print("words2UpperCaseWord2:");
+		System.out.println(words2UpperCaseWord(WORDS));
+
+		System.out.print("orderedNumberList:");
+
+		out.println("************************************");
+
+		out.println(Arrays.toString(NUMBERS));
+
+		System.out.println("print numbers  (with spaces):");
+		printNumbers(NUMBERS);
+
+		
+
+		
+	}
+	
+	}
+	
+	
+	/**
+	 * Use stream API to compute the variance of a stream of numbers.
+	 * 
+	 * @author chencc
+	 *
+	 */
+	public static class HW222 {
+		
+
+    // testing code for HW222		
+	public static void test() {
+		
+		System.out.println(IntStream.of(NUMBERS).summaryStatistics().getAverage());
+
+		Stream<Integer> numbers1 = IntStream.of(NUMBERS).mapToObj(n -> n);
+		out.println(average(numbers1));
+		
+		
+		Integer[] tens = new Integer[]{10,10,10,10,10,10,10,10,10,10};
+		
+		testCase(tens);		
+		
+		testCase(NUMBERS2);				
+
+		
+	// put your additional test code here!
+		
+	}
+
+
+	private static void testCase(Number[] nums) {
+		double avg = average(Stream.of(nums));
+		double var = variance(Stream.of(nums));		
+		
+		out.printf("The numers: %s has average: %.2f and variance: %.2f \n" , Arrays.toString(nums),
+				avg, var);
+	}
+	
+
+	/**
+	 * Note: This is not an assignment problem but a demo method showing how to implement a Collector which can be used  
+	 * by the Stream#collect() method to find the average value of a number stream. In this method,
+	 * we compute the average value for any Stream whose elements are a subtype of Number.
+	 * 
+	 * @param strm a stream of an unknown subtype of Number.
+	 * @return the average double value of the input stream.
+	 */
+	public static double average(Stream<? extends Number> strm) {
+
+		class AVG {
+			int count = 0;
+			double sum = 0;
+
+			double avg() {
+				return ((double) sum) / count;
+			};
+		}
+
+		Supplier<AVG> supplier = AVG::new;
+
+		BiConsumer<AVG, Number> accumulator = (acc, n) -> {
+			acc.count++;
+			acc.sum += n.doubleValue();
+		};
+
+		BinaryOperator<AVG> combiner = (a1, a2) -> {
+			a1.count += a2.count;
+			a1.sum += a2.sum;
+			return a1;
+		};
+
+		Function<AVG, Double> finisher = (acc) -> acc.avg();
+
+		Collector<Number, AVG, Double> avgCollector = new MyCollector<Number, AVG, Double>(supplier, accumulator, combiner,
+				finisher, MyCollector.CH_CONCURRENT_NOID);
+
+		return strm.collect(avgCollector);
+
+	}
+	
+	/**
+	 * The previous average(.) method demonstrated how a collector object can be implemented to compute the average value
+	 * of a stream of numbers. This problem requires you to imitate that method to design a collector which can be used to find the variance
+	 * of a stream of numbers.<br/> 
+	 * Note: Given a stream of numbers [x1,x2,...,xn], avg(average) = (x1+x2+...+xn)/n, variance = ((x1-avg)^2 + ... + (xn-avg)^2)/n. 
+	 * @param nums a stream of instances of a unknown subtype of Number (Double, Integer, BigNumber,...).
+	 * @return the variances of the input stream of numbers.
+	 */
+
+	public static double variance(Stream<? extends Number> nums) {
+
+		class VAR { // Accumulator class for variance
+			// put your data structure and code here!
+		}
+
+		// Implement the following 4 objects for generating variabceCollectors. 
+		Supplier<VAR> supplier = null; // = ?
+
+		BiConsumer<VAR, Number> accumulator = null; // =?
+
+		BinaryOperator<VAR> combiner = null; // = ?
+
+		Function<VAR, Double> finisher = null; // = ?
+
+		Collector<Number, VAR, Double> varianceCollector = new MyCollector<Number, VAR, Double>(supplier, accumulator,
+				combiner, finisher, MyCollector.CH_CONCURRENT_NOID);
+
+		return nums.collect(varianceCollector);
+
+	}
+
+	/**
+	 * Simple implementation class for {@code Collector}.
+	 *
+	 * @param <T>
+	 *            the type of elements to be collected
+	 * @param <A>
+	 *            intermediate type for accumulating values
+	 * @param <R>
+	 *            the type of the result
+	 */
+	public static class MyCollector<T, A, R> implements Collector<T, A, R> {
+		private final Supplier<A> supplier;
+		private final BiConsumer<A, T> accumulator;
+		private final BinaryOperator<A> combiner;
+		private final Function<A, R> finisher;
+		private final Set<Characteristics> characteristics;
+	
+		MyCollector(Supplier<A> supplier, BiConsumer<A, T> accumulator, BinaryOperator<A> combiner,
+				Function<A, R> finisher, Set<Characteristics> characteristics) {
+			this.supplier = supplier;
+			this.accumulator = accumulator;
+			this.combiner = combiner;
+			this.finisher = finisher;
+			this.characteristics = characteristics;
+		}
+	
+		MyCollector(Supplier<A> supplier, BiConsumer<A, T> accumulator, BinaryOperator<A> combiner,
+				Set<Characteristics> characteristics) {
+			this(supplier, accumulator, combiner, (i) -> (R) i, characteristics);
+		}
+	
+		@Override
+		public BiConsumer<A, T> accumulator() {
+			return accumulator;
+		}
+	
+		@Override
+		public Supplier<A> supplier() {
+			return supplier;
+		}
+	
+		@Override
+		public BinaryOperator<A> combiner() {
+			return combiner;
+		}
+	
+		@Override
+		public Function<A, R> finisher() {
+			return finisher;
+		}
+	
+		@Override
+		public Set<Characteristics> characteristics() {
+			return characteristics;
+		}
+	
+		public static final Set<Collector.Characteristics> CH_CONCURRENT_ID = Collections
+				.unmodifiableSet(EnumSet.of(Collector.Characteristics.CONCURRENT, Collector.Characteristics.UNORDERED,
+						Collector.Characteristics.IDENTITY_FINISH));
+		public static final Set<Collector.Characteristics> CH_CONCURRENT_NOID = Collections
+				.unmodifiableSet(EnumSet.of(Collector.Characteristics.CONCURRENT, Collector.Characteristics.UNORDERED));
+		public static final Set<Collector.Characteristics> CH_ID = Collections
+				.unmodifiableSet(EnumSet.of(Collector.Characteristics.IDENTITY_FINISH));
+		public static final Set<Collector.Characteristics> CH_UNORDERED_ID = Collections.unmodifiableSet(
+				EnumSet.of(Collector.Characteristics.UNORDERED, Collector.Characteristics.IDENTITY_FINISH));
+		public static final Set<Collector.Characteristics> CH_NOID = Collections.emptySet();
+	
+	}	
+	
+	
+	}
+	
+	
+	/**
+	 * Simple implementation class for {@code Collector}.
+	 *
+	 * @param <T>
+	 *            the type of elements to be collected
+	 * @param <A>
+	 *            intermediate type for accumulating values
+	 * @param <R>
+	 *            the type of the result
+	 */
+	public static class MyCollector<T, A, R> implements Collector<T, A, R> {
+		private final Supplier<A> supplier;
+		private final BiConsumer<A, T> accumulator;
+		private final BinaryOperator<A> combiner;
+		private final Function<A, R> finisher;
+		private final Set<Characteristics> characteristics;
+	
+		MyCollector(Supplier<A> supplier, BiConsumer<A, T> accumulator, BinaryOperator<A> combiner,
+				Function<A, R> finisher, Set<Characteristics> characteristics) {
+			this.supplier = supplier;
+			this.accumulator = accumulator;
+			this.combiner = combiner;
+			this.finisher = finisher;
+			this.characteristics = characteristics;
+		}
+	
+		MyCollector(Supplier<A> supplier, BiConsumer<A, T> accumulator, BinaryOperator<A> combiner,
+				Set<Characteristics> characteristics) {
+			this(supplier, accumulator, combiner, (i) -> (R) i, characteristics);
+		}
+	
+		@Override
+		public BiConsumer<A, T> accumulator() {
+			return accumulator;
+		}
+	
+		@Override
+		public Supplier<A> supplier() {
+			return supplier;
+		}
+	
+		@Override
+		public BinaryOperator<A> combiner() {
+			return combiner;
+		}
+	
+		@Override
+		public Function<A, R> finisher() {
+			return finisher;
+		}
+	
+		@Override
+		public Set<Characteristics> characteristics() {
+			return characteristics;
+		}
+	
+		public static final Set<Collector.Characteristics> CH_CONCURRENT_ID = Collections
+				.unmodifiableSet(EnumSet.of(Collector.Characteristics.CONCURRENT, Collector.Characteristics.UNORDERED,
+						Collector.Characteristics.IDENTITY_FINISH));
+		public static final Set<Collector.Characteristics> CH_CONCURRENT_NOID = Collections
+				.unmodifiableSet(EnumSet.of(Collector.Characteristics.CONCURRENT, Collector.Characteristics.UNORDERED));
+		public static final Set<Collector.Characteristics> CH_ID = Collections
+				.unmodifiableSet(EnumSet.of(Collector.Characteristics.IDENTITY_FINISH));
+		public static final Set<Collector.Characteristics> CH_UNORDERED_ID = Collections.unmodifiableSet(
+				EnumSet.of(Collector.Characteristics.UNORDERED, Collector.Characteristics.IDENTITY_FINISH));
+		public static final Set<Collector.Characteristics> CH_NOID = Collections.emptySet();
+	
+	}
+
+	
+	/**
+	 * Implement a linear equation solver which can be used to generate a 
+	 * stream of all solutions to an input equation.
+	 * @author chencc
+	 *
+	 */
+	public static class HW223 {
+	
+	/**	
+	 * Given a value sum &ge; 0 and an int[] array cs = {c_0,c_1,...,c_n-1} of non-negative integers, a solution array to cs and sum is an int array
+	 * X ={X_0,X_1,...,X_n-1} such that c_0 X_0 + c_1 X_1 + ... + c_n-1 * X_n-1 = sum. This problem require you to generate 
+	 * the stream of all solutions of the input equations. 
+	 * This problem requires you to implement class LinEqSolver which implements interface
+	 * Supplier&lt;int[]gt; whose get() method can be used to return solutions in sequence.
+	 * The class has only one constructor from which we can pass all coefficients and sum of the linear equations. 
+	 * 
+	 * @parameter sum the sum term of a linear equation.
+	 * @param equation a sequence c_0,c_1,...,c_n-1 of non-negative coefficients of a linear equation.	  
+	 * @return a stream of int[], each array is a solution to the equation c_0 X_0 + ... + c_n-1 X_n-1 = sum. 
+	 */
+	
+	public static class LinEqSolver implements Supplier<int[]>{
+		
+		// the following fields are just suggesting fields for your implementation,
+		// you can change/delete them at your disposal. 
+		int sum;
+		int[] cs;
+		int[] sol;
+		boolean start = false;
+		
+		/**
+		 * 
+		 * @param sum a non-negative int.
+		 * @param cs  a sequence of positive integers.
+		 */
+		public LinEqSolver(int sum, int[] cs){
+			this.sum = sum ;
+			this.cs = cs;
+			sol = new int[cs.length] ;
+			
+		}
+		
+		
+		
+
+
+		/**
+		 * Call this method in succession to get the sequence of all solutions.
+		 * When there is no more solution, return null always.
+		 */
+		@Override
+		public int[] get() {
+			
+				return null ;
+			
+			
+		}
+		
+		/**
+		 * Convert the sequence of all solutions to this linear equation into a INFINITE solution stream. 
+		 * All elements after the last solution are nulls.  
+		 * This is a complete method, you need/should not chaneg it. 
+		 * @return
+		 */
+		Stream<int[]> stream() {
+			
+			return Stream.generate(this) ;
+		}
+		
+	}
+	
+	/**
+	 * Test method. You can add more test cases here!
+	 */
+	
+	public static void test(){
+		
+		int[] cs1 = {3,4,5} ;
+		int sum1 = 10;		
+		testCase(cs1, sum1);  // there are 2 solutions
+		
+		int[] cs2 = {3,4,5,2} ;
+		int sum2 = 10;		
+		testCase(cs2, sum2); // there are 7 solutions
+	
+//TEST-OUTPUT: of case2
+//		Given the equation:3*X_0 + 4*X_1 + 5*X_2 + 2*X_3 = 10
+//		The following are non-negative solutions to the above equation:
+//
+//				[0, 0, 0, 5]
+//				[0, 0, 2, 0]
+//				[0, 1, 0, 3]
+//				[0, 2, 0, 1]
+//				[1, 0, 1, 1]
+//				[2, 0, 0, 2]
+//				[2, 1, 0, 0]
+		
+			
+		
+	}
+
+
+	/**
+	 * Utility method for testing. 
+	 * @param cs
+	 * @param sum
+	 */
+	private static void testCase(int[] cs, int sum) {
+		// Supplier<int[]> supplier =  new LinEqSolver(10, cs);
+		
+		Stream<int[]> st = new LinEqSolver(10, cs).stream();
+		
+		
+		
+		StringBuffer sb= new StringBuffer("\nGiven the equation:");
+		for(int k = 0; k < cs.length; k++){
+			sb.append(cs[k] + "*X_" + k + " ");
+			if(k == cs.length -1){
+				sb.append("= ");
+			} else {
+				sb.append("+ ") ;
+			}
+		}
+		sb.append(sum);
+		System.out.println(sb);	
+		
+		System.out.println("The following are non-negative solutions to the above equation:\n") ;
+		
+		
+		for(Iterator<int[]> iter = st.iterator(); iter.hasNext();){
+			int[] nrlt = iter.next();
+			if(nrlt == null) break ;
+			System.out.println(Arrays.toString(nrlt)) ;
+		}
+	}
+	
+	
+	}
+	
+
+	public static void main(String[] args) {		
+		HW221.test() ;	
+			
+		HW223.test() ;
+		
+		HW222.test() ;
+
+	}
+
+}
